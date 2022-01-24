@@ -1,0 +1,16 @@
+notifications:
+  email:
+    on_success: never
+before_install:
+  - wget http://static.rust-lang.org/dist/rust-nightly-x86_64-unknown-linux-gnu.tar.gz
+  - tar xf rust-nightly-x86_64-unknown-linux-gnu.tar.gz
+install:
+  - sudo ./rust-nightly-x86_64-unknown-linux-gnu/install.sh
+script:
+  - mkdir build
+  - cd build
+  - cmake .. -DCMAKE_INSTALL_PREFIX=/tmp
+  - make -j
+  - make test -j
+  - make doc -j
+  - make install
